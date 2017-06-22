@@ -15,5 +15,6 @@ RUN make
 ENV POOL stratum+tcp://xmr.pool.minergate.com:45560
 ENV USERNAME username
 ENV DONATE 5
+ENV THREADS 4
 
-CMD ./xmrig -o $POOL -u $USERNAME -p x -k --donate-level=$DONATE
+CMD ./xmrig -o $POOL -u $USERNAME -p x -k --donate-level=$DONATE -t $THREADS

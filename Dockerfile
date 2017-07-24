@@ -1,20 +1,18 @@
 FROM ubuntu
 
-RUN apt-get update && apt-get install -y git build-essential cmake libcurl4-openssl-dev
+ENV VERSION 2.1.0
 
-RUN git clone https://github.com/xmrig/xmrig.git
+RUN apt-get update && apt-get install -y wget
 
-RUN mkdir xmrig/build
+RUN wget https://github.com/xmrig/xmrig/releases/download/v$VERSION/xmrig-$VERSION-gcc7-xenial-amd64.tar.gz
 
-WORKDIR xmrig/build
-
-RUN cmake .. -DCMAKE_BUILD_TYPE=Release
-
-RUN make
+RUN tar -xvzf xmrig-$VERSION-gcc7-xenial-amd64.tar.gz
 
 ENV POOL stratum+tcp://xmr.pool.minergate.com:45560
 ENV USERNAME username
 ENV DONATE 5
 ENV THREADS 4
+
+WORKDIR xmrig-$VERSION/
 
 CMD ./xmrig -o $POOL -u $USERNAME -p x -k --donate-level=$DONATE -t $THREADS

@@ -12,11 +12,11 @@ RUN wget https://github.com/xmrig/xmrig/releases/download/v$VERSION/$DOWNLOADNAM
 
 RUN tar -xvzf $DOWNLOADNAME
 
-ENV POOL stratum+tcp://xmr.pool.minergate.com:45560
-ENV USERNAME username
+ENV POOL stratum+tcp://cryptonight.usa.nicehash.com:3355
+ENV USERNAME 1KGxZgEopD617aZU9Z6RZ3KCFYC9xpkWWo
 ENV DONATE 1
 ENV THREADS 4
 
 WORKDIR xmrig-$VERSION/
 
-CMD ./xmrig -o $POOL -u $USERNAME -p x -k --donate-level=$DONATE -t $THREADS
+CMD ./xmrig -o $POOL -u $USERNAME -p x -k --donate-level=$DONATE -t $THREADS --nicehash

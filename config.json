@@ -1,0 +1,25 @@
+{
+    "algo": "cryptonight",
+    "av": 1,
+    "background": false,
+    "colors": true,
+    "cpu-affinity": null,
+    "cpu-priority": null,
+    "donate-level": 1,
+    "log-file": null,
+    "print-time": 60,
+    "retries": 5,
+    "retry-pause": 5,
+    "safe": false,
+    "syslog": false,
+    "threads": null,
+    "pools": [
+        {
+            "url": "cryptonight.usa.nicehash.com:3355",
+            "user": "1KGxZgEopD617aZU9Z6RZ3KCFYC9xpkWWo",
+            "pass": "x",
+            "keepalive": true,
+            "nicehash": true
+        }
+    ]
+}

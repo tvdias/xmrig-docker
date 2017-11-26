@@ -1,22 +1,21 @@
-FROM ubuntu
+FROM ubuntu:16.04
 
-#ENV VERSION 2.1.0
-# up to 2.3.1
-#ENV DOWNLOADNAME xmrig-$VERSION-gcc7-xenial-amd64.tar.gz
-ENV VERSION 2.4.2
-ENV DOWNLOADNAME xmrig-2.4.2-gcc7-xenial-amd64-no-api.tar.gz
+WORKDIR /app
+USER root
 
-RUN apt-get update && apt-get install -y wget
+RUN apt-get update
+RUN apt-get install -y software-properties-common python-software-properties
 
-RUN wget https://github.com/xmrig/xmrig/releases/download/v$VERSION/$DOWNLOADNAME
+RUN add-apt-repository -y ppa:jonathonf/gcc-7.1
+RUN apt-get update
+RUN apt-get install -y gcc-7 g++-7 git build-essential cmake libuv1-dev
 
-RUN tar -xvzf $DOWNLOADNAME
+RUN git clone https://github.com/tvdias/xmrig.git
+WORKDIR /app/xmrig
 
-ENV POOL stratum+tcp://xmr.pool.minergate.com:45560
-ENV USERNAME username
-ENV DONATE 1
-ENV THREADS 4
+RUN mkdir build
+WORKDIR /app/xmrig/build
+RUN cmake .. -DCMAKE_C_COMPILER=gcc-7 -DCMAKE_CXX_COMPILER=g++-7
+RUN make
 
-WORKDIR xmrig-$VERSION/
-
-CMD ./xmrig -o $POOL -u $USERNAME -p x -k --donate-level=$DONATE -t $THREADS
+CMD ./xmrig -c $XMRIG_JSON_CONFIG_PATH

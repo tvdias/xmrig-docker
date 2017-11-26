@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu:16.04
 
 #ENV VERSION 2.1.0
 # up to 2.3.1
